@@ -1,7 +1,8 @@
 class puppet-lbchains::voice (
   $account_name = $name,
   $ip = {},
-  $voice_port = $port 
+  $voice_port = $port, 
+  $every = {},
 
 ) inherits puppet-lbchains::params {
 

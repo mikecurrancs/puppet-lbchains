@@ -12,8 +12,7 @@ Rules can be 1 node or 1+n nodes
 
 A 1 node ruleset looks like this 
 
-###############################################################################
-
+```
 #/bin/bash
 
 # rti-http chain
@@ -27,15 +26,13 @@ iptables -t nat -A rti-http -p tcp --dport 80 -m state --state NEW -j DNAT --to-
 # chain done
 
 iptables -t nat -L rti-http
-
-###############################################################################
+```
 
 
 A 1+n node ruleset looks like this
 
 
-###############################################################################
-
+```
 #/bin/bash
 
 # rti-http chain
@@ -51,5 +48,4 @@ iptables -t nat -A rti-http -p tcp --dport 80 -m state --state NEW -j DNAT --to-
 # chain done
 
 iptables -t nat -L rti-http
-
-###############################################################################
+```

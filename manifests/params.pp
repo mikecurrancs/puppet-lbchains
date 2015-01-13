@@ -1,0 +1,3 @@
+class puppet-lbchains::params {
+
+}

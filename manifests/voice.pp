@@ -1,10 +1,10 @@
-class puppet-lbchains::voice (
-  $account_name = $name,
+class lbchains::voice (
+  $name = $account_name,
   $ip = {},
-  $voice_port = $port, 
+  $port = $lbchains::params::voice_port, 
   $every = {},
 
-) inherits puppet-lbchains::params {
+) inherits lbchains::params {
 
     file { 'voice':
       path => '/etc/lb-chains/${name}-voice',
@@ -13,7 +13,7 @@ class puppet-lbchains::voice (
       group => "root",
     }
 
-    file_line { 'rule 1':
+    file_line { 'voice_single_server':
       path => '/etc/lb-chains/${name}-voice',
       line => '#/bin/bash',
       line => '# ${name}-voice',

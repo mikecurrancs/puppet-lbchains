@@ -1,5 +1,5 @@
 class lbchains::params {
-  $account_name = undef
+  $account_name = undef,
   $voice_port = 9080
   $https_port = 443
   $https_forward_port = 8443

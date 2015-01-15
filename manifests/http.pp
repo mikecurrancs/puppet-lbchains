@@ -1,4 +1,4 @@
-class lbchains::http (
+define lbchains::http (
   $account_name = $name,
   $ip = {},
   $source_port = $lbchains::params::http_port,
@@ -7,14 +7,14 @@ class lbchains::http (
 
 ) inherits lbchains::params {
 
-    file { 'http':
+    file { "http-${account_name}":
       path => '/etc/lb-chains/${account_name}-http',
       mode => "0644",
       owner => "root",
       group => "root",
     }
 
-    file_line { 'http_single_server':
+    file_line { "http_single_server-${account_name}":
       path => '/etc/lb-chains/${account_name}-http',
       line => '#/bin/bash',
       line => '# ${account_name}-http',

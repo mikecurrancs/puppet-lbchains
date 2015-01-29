@@ -1,6 +1,5 @@
 define lbchains::http (
   $account_name = $name,
-  $base_ipaddress = undef,
   $node_one = hiera($ipaddress),
   $nodeandevery = [],
   $source_port = $lbchains::params::http_port,
@@ -22,7 +21,7 @@ define lbchains::http (
       line => 'iptables -t nat -F ${account_name}-http',
       line => 'iptables -t nat -Z ${account_name}-http',
       line => '# hostname',
-      line => 'iptables -t nat -A ${account_name}-http -p tcp --dport ${source_port} -m state --state NEW -j DNAT --to-destination ${ip}:${dest_port}',
+      line => 'iptables -t nat -A ${account_name}-http -p tcp --dport ${source_port} -m state --state NEW -j DNAT --to-destination ${node_one}:${dest_port}',
       line => '# Chain done',
       line => 'iptables -t nat -L ${account_name}-http',
       require => File[http],
@@ -36,9 +35,9 @@ define lbchains::http (
       line => 'iptables -t nat -Z ${account_name}-http',
       line => '# hostname',
       each ($nodeandevery) {
-      line => 'iptables -t nat -A ${account_name}-http -p tcp -m tcp --dport ${source_port} -m state --state NEW -m statistic --mode nth --every ($host[2]) -j DNAT --to-destination ($host[1]):${dest_port}
+      line => 'iptables -t nat -A ${account_name}-http -p tcp -m tcp --dport ${source_port} -m state --state NEW -m statistic --mode nth --every ($nodeandevery[2]) -j DNAT --to-destination ($nodeandevery[1]):${dest_port}
       }
-      line => 'iptables -t nat -A ${account_name}-http -p tcp --dport ${source_port} -m state --state NEW -j DNAT --to-destination ${ip}:${dest_port}',
+      line => 'iptables -t nat -A ${account_name}-http -p tcp --dport ${source_port} -m state --state NEW -j DNAT --to-destination ${node_one}:${dest_port}',
       line => '# Chain done',
       line => 'iptables -t nat -L ${account_name}-http',
       require => File[http], 

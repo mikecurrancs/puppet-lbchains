@@ -29,7 +29,7 @@ iptables -t nat -L rti-http
 ```
 
 
-A 1+n node ruleset looks like this
+And a 1+n node ruleset looks like this
 
 
 ```
